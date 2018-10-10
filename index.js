@@ -17,7 +17,7 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
   }
 }
 
-const getWebRTCVideoElement = async (height, width, video) => {
+const getWebRTCVideoElement = async (video, height, width) => {
   let isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')
   let promise = isIOS ? getWebRTCStream() : getWebRTCStream({video: {height, width}})
   promise.then((stream) => {
@@ -29,7 +29,7 @@ const getWebRTCVideoElement = async (height, width, video) => {
   })
 }
 
-const getWebRTCStream = async (e, constraints={video: true, audio: true}) => {
+const getWebRTCStream = async (constraints={video: true, audio: true}) => {
   let stream = await navigator.mediaDevices.getUserMedia(constraints)
   .then((stream) => stream)
   .catch((err) => err)
