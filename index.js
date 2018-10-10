@@ -26,7 +26,7 @@ const getWebRTCVideoElement = async (video, height, width) => {
       video.height = height
       video.width = width
     }
-  })
+  }).catch((err) => err)
 }
 
 const getWebRTCStream = async (constraints={video: true, audio: true}) => {
