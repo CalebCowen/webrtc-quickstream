@@ -36,7 +36,7 @@ const getWebRTCStream = async (e, constraints={video: true, audio: true}) => {
   return stream
 }
 
-exports = {
+module.exports = {
   getWebRTCStream,
   getWebRTCVideoElement
 }
