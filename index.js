@@ -26,14 +26,14 @@ const getWebRTCVideoElement = async (video, height, width) => {
       video.height = height
       video.width = width
     }
-  }).catch((err) => err)
+  }).catch((err) => throw new Error(err))
 }
 
 const getWebRTCStream = async (constraints={video: true, audio: true}) => {
-  let stream = await navigator.mediaDevices.getUserMedia(constraints)
+  let result = await navigator.mediaDevices.getUserMedia(constraints)
   .then((stream) => stream)
-  .catch((err) => err)
-  return stream
+  .catch((err) => throw new Error(err))
+  return result
 }
 
 module.exports = {
