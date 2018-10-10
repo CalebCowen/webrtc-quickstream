@@ -20,7 +20,7 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
 const getWebRTCVideoElement = async (video, height, width) => {
   let isIOS = navigator.userAgent.includes('Safari')
   let promise = isIOS ? getWebRTCStream() : getWebRTCStream({video: {height, width}})
-  let newPromise = await promise.then((stream) => {
+  await promise.then((stream) => {
     video.srcObject = stream
     if (isIOS) {
       video.height = height
@@ -28,13 +28,12 @@ const getWebRTCVideoElement = async (video, height, width) => {
       video.playsinline = true
     }
   })
-  return newPromise
+  return promise
 }
 
 const getWebRTCStream = async (constraints={video: true, audio: true}) => {
   let result = await navigator.mediaDevices.getUserMedia(constraints)
   .then((stream) => stream)
-  .catch((err) => throw new Error(err))
   return result
 }
 
