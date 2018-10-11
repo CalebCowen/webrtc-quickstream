@@ -23,19 +23,26 @@ const getWebRTCVideoElement = (video, height, width) => {
   promise.then((stream) => {
     if (stream === undefined) {
       throw new Error('getUserMedia is not implemented in this browser')
-    }
-    video.srcObject = stream
-    if (isIOS) {
-      video.height = height
-      video.width = width
-      video.playsinline = true
+    } else {
+      video.srcObject = stream
+      if (isIOS) {
+        video.height = height
+        video.width = width
+        video.playsinline = true
+      }
     }
   })
 }
 
 const getWebRTCStream = async (constraints={video: true, audio: true}) => {
   let result = await navigator.mediaDevices.getUserMedia(constraints)
-  .then((stream) => stream).catch((err) => Promise.reject(err))
+  .then((stream) => {
+    if (stream === undefined) {
+      throw new Error('getUserMedia is not implemented in this browser')
+    } else {
+      return stream
+    }
+  })
   return result
 }
 
