@@ -29,11 +29,12 @@ const getWebRTCVideoElement = (video, height, width) => {
       video.playsinline = true
     }
   }).catch((err) => console.log('catch'))
+  return promise
 }
 
 const getWebRTCStream = async (constraints={video: true, audio: true}) => {
   let result = await navigator.mediaDevices.getUserMedia(constraints)
-  .then((stream) => stream).catch((err) => console.log(err))
+  .then((stream) => stream).catch((err) => err)
   return result
 }
 
