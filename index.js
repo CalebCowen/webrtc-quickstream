@@ -28,10 +28,9 @@ const getWebRTCVideoElement = (video, height, width) => {
       video.playsinline = true
     }
   }).catch((err) => {
-    console.log(err)
     return new Error(err)
   })
-  return promise
+  console.log(err)
 }
 
 const getWebRTCStream = async (constraints={video: true, audio: true}) => {
