@@ -21,14 +21,16 @@ const getWebRTCVideoElement = (video, height, width) => {
   let isIOS = navigator.userAgent.includes('Safari')
   let promise = isIOS ? getWebRTCStream() : getWebRTCStream({video: {height, width}})
   promise.then((stream) => {
-    console.log(stream)
     video.srcObject = stream
     if (isIOS) {
       video.height = height
       video.width = width
       video.playsinline = true
     }
-  }).catch((err) => console.log('catch'))
+  }).catch((err) => {
+    console.log(err)
+    return new Error(err)
+  })
   return promise
 }
 
