@@ -32,7 +32,9 @@ const getWebRTCVideoElement = (video, height=window.innerHeight, width=window.in
 }
 
 const getWebRTCStream = (constraints={video: true, audio: true}) => {
-  return navigator.mediaDevices.getUserMedia(constraints)
+  let promise = navigator.mediaDevices.getUserMedia(constraints)
+  promise.catch((err) => new Error(err))
+  return promise
 }
 
 module.exports = {
