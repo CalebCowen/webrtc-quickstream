@@ -27,7 +27,7 @@ const getWebRTCVideoElement = (video, height=window.innerHeight, width=window.in
       video.width = width
       video.playsinline = true
     }
-  })
+  }).catch((err) => new Error(err))
   return promise
 }
 
