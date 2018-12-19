@@ -4,6 +4,9 @@ WebRTC Quickstream is a package to help create a WebRTC Media Stream and attach 
 
 (Note: WebRTC is not supported on Chrome for iOS)
 
+***Install***
+`npm i webrtc-quickstream`
+
 ***Usage***<br>
 getWebRTCVideoElement:
 The code below passes a video element, along with it's height, width, and a boolean argument for audio to the `getWebRTCVideoElement()` function.
