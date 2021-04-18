@@ -19,15 +19,17 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
 
 const getWebRTCVideoElement = (video, height=window.innerHeight, width=window.innerWidth, audio=true) => {
   return getWebRTCStream({video: {height, width}, audio}).then((stream) => {
+    video.muted = !audio
     video.srcObject = stream
   }).catch((err) => new Error(err))
 }
 
 const getWebRTCStream = (constraints={
-  video: true,
   audio: true,
-  height: window.innerHeight,
-  width: window.innerWidth
+  video: {
+    height: window.innerHeight,
+    width: window.innerWidth
+  }
 }) => {
   let promise = navigator.mediaDevices.getUserMedia(constraints)
   promise.catch((err) => new Error(err))
